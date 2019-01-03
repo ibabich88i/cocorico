@@ -116,6 +116,13 @@ class Listing extends BaseListing
      */
     private $options;
 
+    /**
+     * @Assert\Isbn(type = "isbn10", message = "This value is not  valid.")
+     *
+     * @ORM\Column(name="isbn", type="string", nullable=true)
+     */
+    private $isbn;
+
 
     public function __construct()
     {
@@ -642,5 +649,21 @@ class Listing extends BaseListing
                 }
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getIsbn()
+    {
+        return $this->isbn;
+    }
+
+    /**
+     * @param string $isbn
+     */
+    public function setIsbn($isbn = null): void
+    {
+        $this->isbn = $isbn;
     }
 }

@@ -17,6 +17,6 @@ services:
                 new_thread_message_user: "%cocorico_message.new_thread_message_user.email.template%"
 
     cocorico_message.mailer.admin:
-        calls: Cocorico\MessageBundle\Mailer\TwigSwiftAdminMailer
+        class: Cocorico\MessageBundle\Mailer\TwigSwiftAdminMailer
         arguments:
             - "@cocorico.mailer.twig_swift"

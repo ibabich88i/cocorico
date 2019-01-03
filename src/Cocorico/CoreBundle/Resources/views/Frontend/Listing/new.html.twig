@@ -272,6 +272,11 @@
                     </div>
                 {% endif %}
                 <div class="btns-area new-listing">
+                    {{ form_widget(form.children.isbn) }}
+                    <span class="label">{{ form_label(form.children.isbn) }}</span>
+                    {{ form_widget(form.children.isbn) }}
+                </div>
+                <div class="btns-area new-listing">
                     {{ form_errors(form.tac) }}
                     <div class="agreement">
                         {{ form_widget(form.tac) }}

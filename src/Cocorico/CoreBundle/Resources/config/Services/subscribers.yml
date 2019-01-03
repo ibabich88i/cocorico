@@ -23,3 +23,9 @@ services:
             - "@logger"
         tags:
             - { name: kernel.event_subscriber}
+
+    #Listing subscriber
+    cocorico_listing.form.subscriber:
+        class: Cocorico\CoreBundle\Event\CreatingFormSubscriber
+        tags:
+            - { name: kernel.event_subscriber}
