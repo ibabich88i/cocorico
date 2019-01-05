@@ -17,9 +17,9 @@ use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Listing
@@ -123,6 +123,11 @@ class Listing extends BaseListing
      */
     private $isbn;
 
+    /**
+     * @ManyToMany(targetEntity="Holiday", mappedBy="listings")
+     * @var ArrayCollection
+     */
+    private $holidays;
 
     public function __construct()
     {
@@ -133,6 +138,7 @@ class Listing extends BaseListing
         $this->bookings = new ArrayCollection();
         $this->threads = new ArrayCollection();
         $this->options = new ArrayCollection();
+        $this->holidays = new ArrayCollection();
     }
 
 
@@ -662,8 +668,38 @@ class Listing extends BaseListing
     /**
      * @param string $isbn
      */
-    public function setIsbn($isbn = null): void
+    public function setIsbn($isbn = null)
     {
         $this->isbn = $isbn;
+    }
+
+    /**
+     * @param \Cocorico\CoreBundle\Entity\Holiday $holiday
+     * @return $this
+     */
+    public function addHoliday(Holiday $holiday)
+    {
+        $this->holidays->add($holiday);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getHolidays()
+    {
+        return $this->holidays;
+    }
+
+    /**
+     * @param \Cocorico\CoreBundle\Entity\Holiday $holiday
+     * @return $this
+     */
+    public function removeHoliday(Holiday $holiday)
+    {
+        $this->holidays->remove($holiday);
+
+        return $this;
     }
 }

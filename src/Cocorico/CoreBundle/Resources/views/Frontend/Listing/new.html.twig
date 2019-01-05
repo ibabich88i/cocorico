@@ -120,11 +120,11 @@
 
                                         {% if bundleExist('CocoricoDeliveryBundle') %}
                                             {% include 'CocoricoDeliveryBundle:Frontend:Listing/_form_delivery.html.twig' with {
-                                            'form': form
+                                                'form': form
                                             } only %}
                                         {% elseif bundleExist('CocoricoCarrierBundle') %}
                                             {% include 'CocoricoCarrierBundle:Frontend:Listing/_form_carrier.html.twig' with {
-                                            'form': form
+                                                'form': form
                                             } only %}
                                         {% endif %}
                                     </div>
@@ -265,17 +265,28 @@
                             <legend class="hidden">form signup</legend>
                             <h2>{{ 'listing.new.signup.title'|trans }}</h2>
                             {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
-                            'form_registration' : form.user,
-                            'form_login': form.user_login
+                                'form_registration' : form.user,
+                                'form_login': form.user_login
                             } only %}
                         </fieldset>
                     </div>
                 {% endif %}
+
                 <div class="btns-area new-listing">
-                    {{ form_widget(form.children.isbn) }}
                     <span class="label">{{ form_label(form.children.isbn) }}</span>
                     {{ form_widget(form.children.isbn) }}
                 </div>
+
+
+                <div class="btns-area new-listing">
+                    <span class="label">{{ form_label(form.children.holidays) }}</span>
+                    {% for row in form.children.holidays %}
+                        <div class="input-group">
+                            {{ form_row(row) }}
+                        </div>
+                    {% endfor %}
+                </div>
+
                 <div class="btns-area new-listing">
                     {{ form_errors(form.tac) }}
                     <div class="agreement">
@@ -299,7 +310,7 @@
                     </div>
 
                 </div>
-                {{ form_end(form) }}
+
             </div>
 
         {% endblock %}
@@ -313,8 +324,8 @@
 
     {#Geocoding #}
     {% include '@CocoricoCore/Frontend/Listing/js/_geocoding_js.html.twig' with {
-    'map_elt': '#map-listing',
-    'marker_draggable': true
+        'map_elt': '#map-listing',
+        'marker_draggable': true
     } only %}
 
 
@@ -336,10 +347,10 @@
 
     {#Files upload#}
     {% include '@CocoricoCore/Frontend/Common/js/_upload_js.html.twig' with {
-    'upload_elt': '#listing_image_new',
-    'upload_images': '#listing_image_uploaded',
-    'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
-    'upload_max': listing_img_max - listing.images.count,
+        'upload_elt': '#listing_image_new',
+        'upload_images': '#listing_image_uploaded',
+        'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
+        'upload_max': listing_img_max - listing.images.count,
     } only %}
 
 {% endblock %}

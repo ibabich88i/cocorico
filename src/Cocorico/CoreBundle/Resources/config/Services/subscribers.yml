@@ -27,5 +27,7 @@ services:
     #Listing subscriber
     cocorico_listing.form.subscriber:
         class: Cocorico\CoreBundle\Event\CreatingFormSubscriber
+        arguments:
+            - "@doctrine.orm.entity_manager"
         tags:
             - { name: kernel.event_subscriber}
